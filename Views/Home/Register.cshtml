@@ -1,7 +1,13 @@
+@{
+  Layout = "~/Views/Shared/customerLo.cshtml";
+}
+@{
+    ViewData["Title"] = "Register";
+}
 <!doctype html>
 <html lang="en">
  
-<head>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,34 +18,35 @@
     <link rel="stylesheet" href="../assets/libs/css/style.css">
     <link rel="stylesheet" href="../assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
     <style>
-    html,
+  
     body {
-        height: 100%;
-    }
 
-    body {
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-align: center;
-        align-items: center;
-        padding-top: 40px;
-        padding-bottom: 40px;
-        background-image: url('/assets/images/skypic4.jpg');
+
+        align-items: center center;
+        background-image: url('/assets/images/skypic3.jpg');
         background-position: center;
      
         background-size: 300px 100px;
-            }
-    </style>
-</head>
+        }
 
-<body>
+    .whitebox{
+        height: 150px;
+        width: 100%;
+    }
+    </style>
+
+    <div class="whitebox"> </div>
+    </style>
+
+
+
     <!-- ============================================================== -->
     <!-- login page  -->
 
     <!-- ============================================================== -->
     <div class="splash-container rounded"> 
         <div class="shadow-lg card ">
-            <div class="card-header text-center rounded"><a href="../index.html"><img class="logo-img" src="../assets/images/logo3.png" alt="logo"></a><span class="splash-description">Regist your account </span></div>
+            <div class="card-header text-center rounded"><a asp-controller="Customer" asp-action="Index"><img class="logo-img" src="../assets/images/logo3.png" alt="logo"></a><span class="splash-description">Regist your account </span></div>
             <div class="card-body">
                 <form>
                     <div class="form-group">
@@ -59,7 +66,7 @@
                 </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-block rounded">Sign up</button>
                     <div class="card-footer text-center bg-white">
-                        <p>Already member? <a href="#" class="text-secondary">Login Here.</a></p>
+                        <p>Already member? <a class="text-secondary" asp-controller="Home" asp-action="Login">Login Here.</a></p>
                     </div>
                 </form>
             </div>
@@ -68,6 +75,5 @@
   
     <script src="../assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-</body>
- 
+
 </html>
