@@ -10,18 +10,21 @@ namespace ASMProject.Models;
 public partial class Cart
 {
     [Key]
-    [Column("CartID", TypeName = "decimal(18, 0)")]
-    public decimal CartId { get; set; }
+    [Column("CartID")]
+    public int CartId { get; set; }
 
-    [Column("CusID", TypeName = "decimal(18, 0)")]
-    public decimal CusId { get; set; }
+    [Column("UID")]
+    public string Uid { get; set; } = null!;
 
-    [Column("BookID", TypeName = "decimal(18, 0)")]
-    public decimal BookId { get; set; }
+    [Column("BookID")]
+    public int BookId { get; set; }
 
     [Column(TypeName = "decimal(18, 0)")]
     public decimal Price { get; set; }
 
-    [Column(TypeName = "decimal(18, 0)")]
-    public decimal Quantitity { get; set; }
+    public int Quantity { get; set; }
+
+    [ForeignKey("BookId")]
+    [InverseProperty("Carts")]
+    public virtual Book Book { get; set; } = null!;
 }

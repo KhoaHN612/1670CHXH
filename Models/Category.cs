@@ -10,17 +10,15 @@ namespace ASMProject.Models;
 public partial class Category
 {
     [Key]
-    [Column("CatID", TypeName = "decimal(18, 0)")]
-    public decimal CatId { get; set; }
+    [Column("CatID")]
+    public int CatId { get; set; }
 
     [StringLength(50)]
     public string Name { get; set; } = null!;
 
-    [Column(TypeName = "decimal(18, 0)")]
-    public decimal AddBy { get; set; }
+    public int AddBy { get; set; }
 
-    [StringLength(50)]
-    public string Status { get; set; } = null!;
+    public byte Status { get; set; }
 
     [InverseProperty("Cat")]
     public virtual ICollection<Book> Books { get; set; } = new List<Book>();

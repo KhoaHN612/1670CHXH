@@ -1,4 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionTestDbConnection = builder.Configuration.GetConnectionString("MyConnect");
+
+builder.Services.AddDbContext<ASMProject.Models.Db1670asmContext>(options =>
+   options.UseSqlServer(connectionTestDbConnection));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

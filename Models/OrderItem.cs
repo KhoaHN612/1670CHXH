@@ -10,23 +10,22 @@ namespace ASMProject.Models;
 public partial class OrderItem
 {
     [Key]
-    [Column("OrItemID", TypeName = "decimal(18, 0)")]
-    public decimal OrItemId { get; set; }
+    [Column("OrItemID")]
+    public int OrItemId { get; set; }
 
-    [Column("OrderID", TypeName = "decimal(18, 0)")]
-    public decimal OrderId { get; set; }
+    [Column("OrID")]
+    public int OrId { get; set; }
 
-    [Column("BookID", TypeName = "decimal(18, 0)")]
-    public decimal BookId { get; set; }
+    [Column("BookID")]
+    public int BookId { get; set; }
 
-    [Column(TypeName = "decimal(18, 0)")]
-    public decimal Quantity { get; set; }
+    public int Quantity { get; set; }
 
     [ForeignKey("BookId")]
     [InverseProperty("OrderItems")]
     public virtual Book Book { get; set; } = null!;
 
-    [ForeignKey("OrderId")]
+    [ForeignKey("OrId")]
     [InverseProperty("OrderItems")]
-    public virtual Order Order { get; set; } = null!;
+    public virtual Order Or { get; set; } = null!;
 }

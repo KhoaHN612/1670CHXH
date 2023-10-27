@@ -10,15 +10,15 @@ namespace ASMProject.Models;
 public partial class Order
 {
     [Key]
-    [Column("OrID", TypeName = "decimal(18, 0)")]
-    public decimal OrId { get; set; }
+    [Column("OrID")]
+    public int OrId { get; set; }
 
-    [Column("CusID", TypeName = "decimal(18, 0)")]
-    public decimal CusId { get; set; }
+    [Column("CusID")]
+    public string CusId { get; set; } = null!;
 
-    [Column(TypeName = "date")]
-    public DateTime OrDate { get; set; }
+    [Column(TypeName = "datetime")]
+    public DateTime OrTime { get; set; }
 
-    [InverseProperty("Order")]
+    [InverseProperty("Or")]
     public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 }

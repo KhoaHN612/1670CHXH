@@ -10,23 +10,26 @@ namespace ASMProject.Models;
 public partial class Book
 {
     [Key]
-    [Column("BookID", TypeName = "decimal(18, 0)")]
-    public decimal BookId { get; set; }
+    [Column("BookID")]
+    public int BookId { get; set; }
 
     [StringLength(50)]
     public string Title { get; set; } = null!;
 
     [StringLength(50)]
-    public string Image { get; set; } = null!;
+    public string? Image { get; set; }
 
     [StringLength(50)]
     public string? Description { get; set; }
 
-    [Column("CatID", TypeName = "decimal(18, 0)")]
-    public decimal CatId { get; set; }
+    [Column("CatID")]
+    public int CatId { get; set; }
 
     [Column(TypeName = "decimal(18, 0)")]
     public decimal Price { get; set; }
+
+    [InverseProperty("Book")]
+    public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
 
     [ForeignKey("CatId")]
     [InverseProperty("Books")]
