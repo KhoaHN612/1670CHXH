@@ -41,6 +41,10 @@ public class HomeController : Controller
     {
         return View();
     }
+    public IActionResult ProductDetail()
+    {
+        return View();
+    }
 
     public IActionResult Products()
     {
