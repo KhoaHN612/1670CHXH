@@ -12,22 +12,39 @@ namespace ASMProject.Controllers
     public class BookController : Controller
     {
         private readonly Db1670asmContext _context;
-        
+
         private readonly IWebHostEnvironment _webHostEnvironment;
 
         public BookController(Db1670asmContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
-             _webHostEnvironment = webHostEnvironment;
+            _webHostEnvironment = webHostEnvironment;
         }
 
-         private string GetUniqueFileName(string fileName)
+        private string GetUniqueFileName(string fileName)
         {
             fileName = Path.GetFileName(fileName);
             return Path.GetFileNameWithoutExtension(fileName)
                    + "_"
                    + Guid.NewGuid().ToString().Substring(0, 4)
                    + Path.GetExtension(fileName);
+        }
+
+        public List<Book> SearchByKey(string key)
+        {
+            return _context.Books.FromSql($"Select * from Books").Include(b => b.Cat).ToList();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Search(string searchkey)
+        {
+            ViewBag.key = searchkey;
+            var book = from b in _context.Books select b;
+            if (!string.IsNullOrEmpty(searchkey))
+            {
+                book = book.Where(b => b.Title!.Contains(searchkey));
+            }
+            return View(await book.ToListAsync());
         }
 
         // GET: Book
@@ -63,6 +80,8 @@ namespace ASMProject.Controllers
             return View();
         }
 
+
+
         // POST: Book/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -75,7 +94,7 @@ namespace ASMProject.Controllers
                 string uniqueFileName = GetUniqueFileName(book.ImageFile.FileName);
                 string filePath = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", uniqueFileName);
 
-                 using (var fileStream = new FileStream(filePath, FileMode.Create))
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
                     await book.ImageFile.CopyToAsync(fileStream);
                 }
@@ -175,14 +194,14 @@ namespace ASMProject.Controllers
             {
                 _context.Books.Remove(book);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool BookExists(int id)
         {
-          return (_context.Books?.Any(e => e.BookId == id)).GetValueOrDefault();
+            return (_context.Books?.Any(e => e.BookId == id)).GetValueOrDefault();
         }
     }
 }

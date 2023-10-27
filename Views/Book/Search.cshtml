@@ -1,0 +1,100 @@
+@model IEnumerable<ASMProject.Models.Book>
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/customerLo.cshtml";
+}
+
+
+<!-- Banner Starts Here -->
+<div class="banner header-text">
+
+    <div class="owl-banner owl-carousel">
+        <div class="banner-item-01">
+            <div class="text-content">
+                <h4>Best Offer</h4>
+                <h2>New Arrivals On Sale</h2>
+            </div>
+        </div>
+        <div class="banner-item-02">
+            <div class="text-content">
+                <h4>Flash Deals</h4>
+                <h2>Get your best products</h2>
+            </div>
+        </div>
+        <div class="banner-item-03">
+            <div class="text-content">
+                <h4>Last Minute</h4>
+                <h2>Grab last minute deals</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Banner Ends Here -->
+<br></br>
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card">
+        <div class="card-body">
+            <form name="search">
+                <div class="form-group form-inline">
+                    <input type="text" name="searchkey" class="form-control form-inline"/>
+                    <input type="submit" value="Search" class="form-control"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<h2>Research key</h2>
+<h1>@ViewBag.key</h1>
+
+@* @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cat.CatId)
+            </td>
+        </tr>
+} *@
+
+<div class="latest-products">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                @foreach (var item in Model)
+                {
+                    <div class="product-item">
+                    <a asp-controller="Home" asp-action="ProductDetail"><img src="~/uploads/@Html.DisplayFor(modelItem => item.Image)"
+                            alt="Book Image"></a>
+      s              <div class="down-content">
+                        <a asp-controller="Home" asp-action="ProductDetail">
+                            <h4>@Html.DisplayFor(modelItem => item.Title)</h4>
+                        </a>
+                        <h6>$ @Html.DisplayFor(modelItem => item.Price)</h6>
+                        <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                        <ul class="stars">
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                        </ul>
+                        <span>Reviews (21)</span>
+                    </div>
+                </div>
+                }   
+            </div>
+        </div>
+    </div>
+</div>
+
