@@ -12,10 +12,22 @@ namespace ASMProject.Controllers
     public class BookController : Controller
     {
         private readonly Db1670asmContext _context;
+        
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public BookController(Db1670asmContext context)
+        public BookController(Db1670asmContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+             _webHostEnvironment = webHostEnvironment;
+        }
+
+         private string GetUniqueFileName(string fileName)
+        {
+            fileName = Path.GetFileName(fileName);
+            return Path.GetFileNameWithoutExtension(fileName)
+                   + "_"
+                   + Guid.NewGuid().ToString().Substring(0, 4)
+                   + Path.GetExtension(fileName);
         }
 
         // GET: Book
@@ -56,10 +68,19 @@ namespace ASMProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookId,Title,Image,Description,CatId,Price")] Book book)
+        public async Task<IActionResult> Create([Bind("BookId,Title,Image,Description,CatId,Price,ImageFile")] Book book)
         {
             if (ModelState.IsValid)
             {
+                string uniqueFileName = GetUniqueFileName(book.ImageFile.FileName);
+                string filePath = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", uniqueFileName);
+
+                 using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await book.ImageFile.CopyToAsync(fileStream);
+                }
+                book.Image = uniqueFileName;
+
                 _context.Add(book);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

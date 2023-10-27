@@ -33,8 +33,11 @@ public partial class Book
 
     [ForeignKey("CatId")]
     [InverseProperty("Books")]
-    public virtual Category Cat { get; set; } = null!;
+    public virtual Category? Cat { get; set; } = null!;
+    [NotMapped]
+    public IFormFile? ImageFile { get; set; }
 
     [InverseProperty("Book")]
     public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+     
 }
