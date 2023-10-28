@@ -91,7 +91,8 @@
     <script src="~/cassets/js/slick.js"></script>
     <script src="~/cassets/js/isotope.js"></script>
     <script src="~/cassets/js/accordions.js"></script>
-
+     @await RenderSectionAsync("Scripts", required: false)
+    
      <script language = "text/Javascript"> 
       cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
       function clearField(t){                   //declaring the array outside of the
