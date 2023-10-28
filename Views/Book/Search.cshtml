@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/customerLo.cshtml";
 }
 
-
 <!-- Banner Starts Here -->
 <div class="banner header-text">
 
@@ -44,30 +43,9 @@
     </div>
 </div>
 
-<h2>Research key</h2>
-<h1>@ViewBag.key</h1>
+<h4>Research Key: @ViewBag.key</h4>
 
-@* @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cat.CatId)
-            </td>
-        </tr>
-} *@
-
-<div class="latest-products">
+@* <div class="latest-products"> *@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
@@ -96,5 +74,5 @@
             </div>
         </div>
     </div>
-</div>
+@* </div> *@
 

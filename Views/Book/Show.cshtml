@@ -1,6 +1,6 @@
 @model IEnumerable<ASMProject.Models.Book>
 @{
-  ViewData["Title"] = "Products";
+  ViewData["Title"] = "Show";
   Layout = "~/Views/Shared/customerLo.cshtml";
 }
 
@@ -28,42 +28,6 @@
   </div>
 </div>
 <!-- Banner Ends Here -->
-<br></br>
-<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-  <div class="card">
-    <div class="card-body">
-      <form name="search">
-        <div class="form-group form-inline">
-          <input type="text" name="searchkey" class="form-control form-inline" />
-          <input type="submit" value="Search" class="form-control" />
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<h2>Research key</h2>
-<h1>@ViewBag.key</h1>
-
-@* @foreach (var item in Model) {
-<tr>
-<td>
-@Html.DisplayFor(modelItem => item.Title)
-</td>
-<td>
-@Html.DisplayFor(modelItem => item.Image)
-</td>
-<td>
-@Html.DisplayFor(modelItem => item.Description)
-</td>
-<td>
-@Html.DisplayFor(modelItem => item.Price)
-</td>
-<td>
-@Html.DisplayFor(modelItem => item.Cat.CatId)
-</td>
-</tr>
-} *@
 
 <div class="latest-products">
   <div class="container">

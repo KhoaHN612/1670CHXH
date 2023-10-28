@@ -30,6 +30,13 @@ namespace ASMProject.Controllers
                    + Path.GetExtension(fileName);
         }
 
+
+        public IActionResult Show()
+        {
+            var products = _context.Books.ToList();
+            return View(products);
+        }
+
         public List<Book> SearchByKey(string key)
         {
             return _context.Books.FromSql($"Select * from Books").Include(b => b.Cat).ToList();
