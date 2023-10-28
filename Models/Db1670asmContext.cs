@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ASMProject.Models;
 
-public partial class Db1670asmContext : DbContext
+public partial class Db1670asmContext : IdentityDbContext
 {
     public Db1670asmContext()
     {
@@ -30,6 +31,7 @@ public partial class Db1670asmContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Book>(entity =>
         {
             entity.HasOne(d => d.Cat).WithMany(p => p.Books)

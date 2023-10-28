@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using ASMProject.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +8,8 @@ var connectionTestDbConnection = builder.Configuration.GetConnectionString("MyCo
 
 builder.Services.AddDbContext<ASMProject.Models.Db1670asmContext>(options =>
    options.UseSqlServer(connectionTestDbConnection));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<Db1670asmContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -31,4 +35,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Customer}/{action=Index}/{id?}");
 
+app.MapRazorPages();
 app.Run();
