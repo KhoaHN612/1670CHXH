@@ -32,14 +32,14 @@
 <div class="latest-products">
   <div class="container">
     <div class="row">
-      <div class="col-md-4">
-        @foreach (var item in Model)
-        {
+      @foreach (var item in Model)
+      {
+        <div class="col-md-4">
           <div class="product-item">
             <a asp-controller="Home" asp-action="ProductDetail"><img
-                src="~/uploads/@Html.DisplayFor(modelItem => item.Image)" alt="Book Image"></a>
+                src="~/uploads/@Html.DisplayFor(modelItem => item.Image)" alt="Book Image" style="max-height: 500px ;"></a>
             <div class="down-content">
-              <a asp-controller="Home" asp-action="ProductDetail">
+              <a asp-controller="Book" asp-action="Details" asp-route-id="@item.BookId">
                 <h4>@Html.DisplayFor(modelItem => item.Title)</h4>
               </a>
               <h6>$ @Html.DisplayFor(modelItem => item.Price)</h6>
@@ -54,8 +54,8 @@
               <span>Reviews (21)</span>
             </div>
           </div>
-        }
-      </div>
+        </div>
+      }
     </div>
   </div>
 </div>
