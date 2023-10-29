@@ -1361,6 +1361,11 @@ Top Header
     margin-right: 8px;
 }
 
+.footer{
+    position: absolute;
+    bottom: 0;
+}
+
 .list-footer,
 .conntection-footer {
     font-size: 14px;

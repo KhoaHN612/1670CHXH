@@ -16,7 +16,7 @@ public partial class Category
     [StringLength(50)]
     public string Name { get; set; } = null!;
 
-    public int AddBy { get; set; }
+    public string AddBy { get; set; }
 
     public byte Status { get; set; }
 

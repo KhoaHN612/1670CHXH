@@ -83,7 +83,7 @@ namespace ASMProject.Controllers
         // GET: Book/Create
         public IActionResult Create()
         {
-            ViewData["CatId"] = new SelectList(_context.Categories, "CatId", "CatId");
+            ViewData["CatId"] = new SelectList(_context.Categories.Where(cat => cat.Status == 2), "CatId", "Name");
             return View();
         }
 
@@ -128,7 +128,7 @@ namespace ASMProject.Controllers
             {
                 return NotFound();
             }
-            ViewData["CatId"] = new SelectList(_context.Categories, "CatId", "CatId", book.CatId);
+            ViewData["CatId"] = new SelectList(_context.Categories.Where(cat => cat.Status == 2), "CatId", "CatId", book.CatId);
             return View(book);
         }
 

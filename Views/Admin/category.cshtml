@@ -52,22 +52,32 @@
                             <p class="text-success">Accepted</p>
                             break;
                         default:
-                            <text>Unknown</text> 
+                            <p>Unknown</p> 
                             break;
                     }
                 </td>
                 <td>
-                    @if (item.Status == 1){
-                        <a asp-action="Edit" asp-route-id="@item.CatId">Edit</a> 
-                        <span>|</span>
-                    }
-                    <a asp-action="Details" asp-route-id="@item.CatId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.CatId">Delete</a>
+                    @switch (item.Status)
+                    {
+                        case 1:
+                            <a class="btn btn-success rounded" asp-action="ProcessStatus" asp-route-id="@item.CatId" asp-route-status="2">Accept</a>
+                            <span>|</span>
+                            <a class="btn btn-danger rounded" asp-action="ProcessStatus" asp-route-id="@item.CatId" asp-route-status="0">Reject</a> 
+                            break;
+                        case 0:
+                        case 2:
+                            <a class="btn btn-danger rounded" asp-action="DeleteStatus" asp-route-id="@item.CatId">Delete</a> 
+                            break;
+                        default:
+                            <p>Unknown</p> 
+                            break;
+                    }          
                 </td>
             </tr>
     }
         </tbody>
     </table>
 </div>
+
 </body>
 </html>

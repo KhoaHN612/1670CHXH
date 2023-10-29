@@ -57,6 +57,7 @@ namespace ASMProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CatId,Name,AddBy,Status")] Category category)
         {
+            category.Status = 1;
             if (ModelState.IsValid)
             {
                 _context.Add(category);
