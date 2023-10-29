@@ -19,6 +19,9 @@ public partial class OrderItem
     [Column("BookID")]
     public int BookId { get; set; }
 
+    [Column(TypeName = "decimal(18, 0)")]
+    public decimal Price { get; set; }
+
     public int Quantity { get; set; }
 
     [ForeignKey("BookId")]

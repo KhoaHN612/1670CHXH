@@ -26,5 +26,5 @@ public partial class Cart
 
     [ForeignKey("BookId")]
     [InverseProperty("Carts")]
-    public virtual Book Book { get; set; } = null!;
+    public virtual Book? Book { get; set; } = null!;
 }

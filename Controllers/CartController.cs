@@ -102,7 +102,7 @@ namespace ASMProject.Controllers
             {
                 return NotFound();
             }
-            ViewData["BookId"] = new SelectList(_context.Books, "BookId", "BookId", cart.BookId);
+            ViewData["BookId"] = new SelectList(_context.Books, "BookId", "Title", cart.BookId);
             return View(cart);
         }
 
@@ -150,15 +150,13 @@ namespace ASMProject.Controllers
                 return NotFound();
             }
 
-            var cart = await _context.Carts
-                .Include(c => c.Book)
-                .FirstOrDefaultAsync(m => m.CartId == id);
-            if (cart == null)
+            var cart = await _context.Carts.FindAsync(id);
+            if (cart != null)
             {
-                return NotFound();
+                _context.Carts.Remove(cart);
             }
-
-            return View(cart);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: Cart/Delete/5

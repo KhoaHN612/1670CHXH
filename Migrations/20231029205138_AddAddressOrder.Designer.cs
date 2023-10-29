@@ -4,6 +4,7 @@ using ASMProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASMProject.Migrations
 {
     [DbContext(typeof(Db1670asmContext))]
-    partial class Db1670asmContextModelSnapshot : ModelSnapshot
+    [Migration("20231029205138_AddAddressOrder")]
+    partial class AddAddressOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -137,11 +140,6 @@ namespace ASMProject.Migrations
                     b.Property<DateTime>("OrTime")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Status");
-
                     b.HasKey("OrId");
 
                     b.ToTable("Order");
@@ -163,9 +161,6 @@ namespace ASMProject.Migrations
                     b.Property<int>("OrId")
                         .HasColumnType("int")
                         .HasColumnName("OrID");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18, 0)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
