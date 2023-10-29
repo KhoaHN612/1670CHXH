@@ -26,6 +26,26 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" hidden/>
+                @switch (@Model.Status)
+                {
+                    case 0:
+                        <p class="text-danger">Rejected</p>
+                        break;
+                    case 1:
+                        <p class="text-warning">Pending</p>
+                        break;
+                    case 2:
+                        <p class="text-success">Accepted</p>
+                        break;
+                    default:
+                        <text>Unknown</text> 
+                        break;
+                }
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="AddBy" class="control-label"></label>
                 <input asp-for="AddBy" class="form-control" value="@User.Identity.Name" readonly/>
                 <span asp-validation-for="AddBy" class="text-danger"></span>
