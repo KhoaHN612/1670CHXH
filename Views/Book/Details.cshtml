@@ -27,15 +27,16 @@
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="~/uploads/@Html.DisplayFor(model => model.Image)" alt="Book Image" /></div>
                     <div class="col-md-6">
-                        <h1 class="display-5 fw-bolder">@Html.DisplayNameFor(model => model.Title)</h1>
-                        <div class="fs-5 mb-5">
-                            <span class="text-decoration-line-through">$@Html.DisplayNameFor(model => model.Price)</span>
+                        <h1 class="display-5 fw-bolder">@Html.DisplayFor(model => model.Title)</h1>
+                        <div class="fs-5 mb-1">
+                            <span class="text-decoration">Price:  @Html.DisplayFor(model => model.Price) $</span>
                         </div>
-                        <p class="lead">@Html.DisplayNameFor(model => model.Description)</p>
+                        <p class="lead mb-1">@Html.DisplayFor(model => model.Description)</p>
+                        <div class="mb-3 mt-3"> <button type="button" class="btn btn-outline-secondary">Category:  @Html.DisplayFor(model => model.Cat.CatId)</button> </div>
                         <div class="d-flex">
                             <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                                <i class="bi-cart-fill me-1"></i>Add to cart</button>
+                            <div class=" flex-shrink-0" >
+                                <a class="btn btn-outline-dark bi-cart-fill me-1" asp-controller="Cart" asp-action="Create" asp-route-id="@Model.BookId" type="button" >Add to cart</a></div>
                         </div>
                     </div>
                 </div>
