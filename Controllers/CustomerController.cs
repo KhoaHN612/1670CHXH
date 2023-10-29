@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ASMProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ASMProject.Controllers;
 
@@ -8,14 +9,21 @@ public class CustomerController : Controller
 {
     private readonly ILogger<CustomerController> _logger;
 
-    public CustomerController(ILogger<CustomerController> logger)
+    private readonly Db1670asmContext _context;
+
+    public CustomerController(ILogger<CustomerController> logger, Db1670asmContext context)
     {
         _logger = logger;
+        _context = context;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var books =await _context.Books.ToListAsync();
+        if(books == null){
+            return NotFound();
+        }
+        return View(books);
     }
 
     public IActionResult Privacy()
