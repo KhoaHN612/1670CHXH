@@ -52,10 +52,10 @@
                 @foreach (var item in Model)
                 {
                     <div class="product-item">
-                    <a asp-controller="Home" asp-action="ProductDetail"><img src="~/uploads/@Html.DisplayFor(modelItem => item.Image)"
+                    <a asp-controller="Book" asp-action="Details"><img src="~/uploads/@Html.DisplayFor(modelItem => item.Image)"
                             alt="Book Image"></a>
       s              <div class="down-content">
-                        <a asp-controller="Home" asp-action="ProductDetail">
+                        <a asp-controller="Book" asp-action="Details" asp-route-id="@item.BookId">
                             <h4>@Html.DisplayFor(modelItem => item.Title)</h4>
                         </a>
                         <h6>$ @Html.DisplayFor(modelItem => item.Price)</h6>
