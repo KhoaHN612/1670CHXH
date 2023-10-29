@@ -1,10 +1,21 @@
 ﻿@page
 @model RegisterConfirmationModel
 @{
+    Layout = "~/Views/Shared/customerLo.cshtml";
+}
+@{
     ViewData["Title"] = "Register confirmation";
 }
 
 <h1>@ViewData["Title"]</h1>
+<style>
+     .whitebox {
+        height: 150px;
+        width: 100%;
+    }
+</style>
+<div class="whitebox"></div>
+<div class="container ">
 @{
     if (@Model.DisplayConfirmAccountLink)
     {
@@ -20,4 +31,6 @@
 </p>
     }
 }
+</div>
+
 
