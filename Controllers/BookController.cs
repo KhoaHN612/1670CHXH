@@ -37,11 +37,6 @@ namespace ASMProject.Controllers
             return View(products);
         }
 
-        public List<Book> SearchByKey(string key)
-        {
-            return _context.Books.FromSql($"Select * from Books").Include(b => b.Cat).ToList();
-        }
-
         [HttpGet]
         public async Task<IActionResult> Search(string searchkey)
         {
@@ -87,8 +82,6 @@ namespace ASMProject.Controllers
             return View();
         }
 
-
-
         // POST: Book/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -111,7 +104,7 @@ namespace ASMProject.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CatId"] = new SelectList(_context.Categories, "CatId", "CatId", book.CatId);
+            ViewData["CatId"] = new SelectList(_context.Categories, "CatId", "Name", book.CatId);
             return View(book);
         }
 
@@ -128,7 +121,7 @@ namespace ASMProject.Controllers
             {
                 return NotFound();
             }
-            ViewData["CatId"] = new SelectList(_context.Categories.Where(cat => cat.Status == 2), "CatId", "CatId", book.CatId);
+            ViewData["CatId"] = new SelectList(_context.Categories.Where(cat => cat.Status == 2), "CatId", "Name", book.CatId);
             return View(book);
         }
 
@@ -137,15 +130,26 @@ namespace ASMProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BookId,Title,Image,Description,CatId,Price")] Book book)
+        public async Task<IActionResult> Edit(int id, [Bind("BookId,Title,Image,Description,CatId,Price,ImageFile")] Book book)
         {
             if (id != book.BookId)
             {
                 return NotFound();
             }
-
+        
             if (ModelState.IsValid)
             {
+                if (book.ImageFile!=null){
+                    string uniqueFileName = GetUniqueFileName(book.ImageFile.FileName);
+                    string filePath = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", uniqueFileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await book.ImageFile.CopyToAsync(fileStream);
+                    }
+                    book.Image = uniqueFileName;
+                }
+
                 try
                 {
                     _context.Update(book);
@@ -164,7 +168,7 @@ namespace ASMProject.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CatId"] = new SelectList(_context.Categories, "CatId", "CatId", book.CatId);
+            ViewData["CatId"] = new SelectList(_context.Categories, "CatId", "Name", book.CatId);
             return View(book);
         }
 
