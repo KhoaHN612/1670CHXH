@@ -9,7 +9,9 @@ var connectionTestDbConnection = builder.Configuration.GetConnectionString("MyCo
 builder.Services.AddDbContext<ASMProject.Models.Db1670asmContext>(options =>
    options.UseSqlServer(connectionTestDbConnection));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<Db1670asmContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+.AddRoles<IdentityRole>()
+.AddEntityFrameworkStores<Db1670asmContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

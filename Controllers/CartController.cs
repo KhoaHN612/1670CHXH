@@ -21,8 +21,20 @@ namespace ASMProject.Controllers
         // GET: Cart
         public async Task<IActionResult> Index()
         {
-            var db1670asmContext = _context.Carts.Include(c => c.Book);
-            return View(await db1670asmContext.ToListAsync());
+            if (User?.Identity?.IsAuthenticated == true){
+                var db1670Context = _context.Carts
+                    .Include(c => c.Book)
+                    .Where(p => p.Uid == User.Identity.Name)
+                    .Include(b=>b.Book.Cat);
+
+                decimal total = db1670Context.Sum(c => c.Price * c.Quantity);
+                int number = db1670Context.Sum(c=>c.Quantity);
+                ViewBag.total = total;
+                ViewBag.number = number;
+
+                return View(await db1670Context.ToListAsync());
+            } 
+            return RedirectToPage("Identity/Account/login");
         }
 
         // GET: Cart/Details/5
@@ -45,10 +57,19 @@ namespace ASMProject.Controllers
         }
 
         // GET: Cart/Create
-        public IActionResult Create()
+        public async Task<IActionResult> CreateAsync(int id)
         {
-            ViewData["BookId"] = new SelectList(_context.Books, "BookId", "BookId");
-            return View();
+            var cart = new Cart();
+            cart.BookId = id;
+            var product = await _context.Books
+                .Include(p => p.Cat)
+                .FirstOrDefaultAsync(m => m.BookId == id);
+            cart.Price = product.Price;
+            cart.Uid = User.Identity.Name;
+            cart.Quantity = 1;
+            _context.Add(cart);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));            
         }
 
         // POST: Cart/Create
