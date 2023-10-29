@@ -7,7 +7,7 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>@ViewData["Title"]</h1>
+
 <!doctype html>
 <html lang="en">
 
@@ -77,6 +77,9 @@
                     <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                 </div>
                 <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+                   <div class="card-footer text-center bg-white">
+                        <p>Already member? <a class="text-secondary" asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Login Here.</a></p>
+                    </div>
             </form>
         </div>
     </div>
