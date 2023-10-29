@@ -1,0 +1,16 @@
+@{
+    ViewData["Title"] = "Create a role";
+    Layout = "~/Views/Shared/adminLO.cshtml";
+}
+
+@model ASMProject.Models.CreateRoleViewModel
+
+<h2>Create Role</h2>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label for="roleName">Role Name</label>
+        <input asp-for="roleName" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>

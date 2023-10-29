@@ -1,4 +1,4 @@
-namespace Lab2.Models
+namespace ASMProject.Models
 {
     public class CreateRoleViewModel
     {
