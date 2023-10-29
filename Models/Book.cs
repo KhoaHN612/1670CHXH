@@ -19,7 +19,7 @@ public partial class Book
     [StringLength(50)]
     public string? Image { get; set; }
 
-    [StringLength(50)]
+    [StringLength(255)]
     public string? Description { get; set; }
 
     [Column("CatID")]

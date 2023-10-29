@@ -34,11 +34,17 @@
         height: 150px;
         width: 100%;
     }
+    .custom-container {
+        max-width: 480px;
+        /* Set the maximum width of the container */
+        padding: 20px;
+        /* Optional: Add padding for spacing inside the container */
+    }
 </style>
 
 <div class="whitebox"> </div>
 <!-- This is form -->
-<div class=" h-100 d-flex align-items-center justify-content-center splash-container rounded " style="width: 100%">
+<div class=" container custom-container rounded " style="width: 100%">
     <div class="shadow-lg card d-flex">
         <div class="card-header text-center rounded"><a asp-controller="Customer" asp-action="Index"><img
                     class="logo-img" src="../../assets/images/logo3.png" alt="logo">
@@ -49,17 +55,17 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div class="form-group">
                     <label asp-for="Input.Email" class="form-label">Email</label>
-                    <input asp-for="Input.Email" class="form-control form-control-lg font-italic fs-8 rounded" autocomplete="username"
+                    <input asp-for="Input.Email" class="form-control form-control-lg fs-8 rounded" autocomplete="username"
                         aria-required="true" placeholder="name@example.com" />
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Input.Password" class="form-label">Password</label>
-                    <input asp-for="Input.Password" class="form-control form-control-lg rounded"
+                    <input asp-for="Input.Password" class="form-control form-control-lg rounded fs-5"
                         autocomplete="current-password" aria-required="true" placeholder="password" />
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
-                <div class="checkbox mb-3">
+                <div class="checkbox mb-3 ml-4">
                     <label asp-for="Input.RememberMe" class="form-label">
                         <input class="form-check-input" asp-for="Input.RememberMe" />
                         @Html.DisplayNameFor(m => m.Input.RememberMe)
