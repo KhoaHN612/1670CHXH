@@ -43,7 +43,7 @@
       {
         <div class="col-md-4">
           <div class="product-item">
-            <a asp-controller="Book" asp-action="Details"><img src="~/uploads/@Html.DisplayFor(modelItem => item.Image)"
+            <a asp-controller="Book" asp-action="Details" asp-route-id="@item.BookId"><img src="~/uploads/@Html.DisplayFor(modelItem => item.Image)"
                 alt=""></a>
             <div class="down-content">
               <a asp-controller="Book" asp-action="Details" asp-route-id="@item.BookId">
