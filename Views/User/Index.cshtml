@@ -1,7 +1,10 @@
 @model List<Microsoft.AspNetCore.Identity.IdentityUser>
 @using Microsoft.AspNetCore.Identity
 @inject UserManager<IdentityUser> UserManager
-
+@{
+    Layout = "~/Views/Shared/adminLo.cshtml";
+    ViewData["Title"] = "Index";
+}
 <h2>Users</h2>
 
 <table class="table">
