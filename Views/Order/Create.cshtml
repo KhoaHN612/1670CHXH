@@ -7,48 +7,70 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Create</title>
+
 </head>
+
 <body>
+    <style>
+        body {
 
-<h4>Order</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label class="control-label">User Name</label>
-                <input asp-for="CusId" class="form-control" value="@User.Identity.Name" readonly/>
-                <span asp-validation-for="CusId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Order Time</label>
-                <input asp-for="OrTime" class="form-control" value=@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") readonly/>
-                <span asp-validation-for="OrTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" value="Waiting" class="form-control" readonly/>
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Make Order" class="btn btn-primary" />
-            </div>
-        </form>
+
+            align-items: center center;
+            background-position: center;
+
+            background-size: 300px 100px;
+        }
+
+        .custom-container {
+            max-width: 480px;
+            max-height: 900px;
+            /* Set the maximum width of the container */
+            padding: 20px;
+            /* Optional: Add padding for spacing inside the container */
+        }
+    </style>
+    <h2 class="text-center mt-5">Order</h2>
+    <hr />
+    <div class="container custom-container rounded " style="width: 100%">
+        <div class="shadow-lg card d-flex">
+        
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group px-3 mt-4">
+                        <label class="control-label text-center">User Name</label>
+                        <input asp-for="CusId" class="form-control" value="@User.Identity.Name" readonly />
+                        <span asp-validation-for="CusId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group px-3">
+                        <label class="control-label">Order Time</label>
+                        <input asp-for="OrTime" class="form-control" value=@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                            readonly />
+                        <span asp-validation-for="OrTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group px-3">
+                        <label asp-for="Address" class="control-label"></label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                    <div class="form-group px-3">
+                        <label asp-for="Status" class="control-label"></label>
+                        <input asp-for="Status" value="Waiting" class="form-control" readonly />
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="submit" value="Make Order" class="btn btn-primary" />
+                    </div>
+                </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div class="text-center">
+        <a asp-action="Index"><button class="btn  btn-light">Back to List <i class="fa fa-sign-out" aria-hidden="true"></i></button></a>
+    </div>
 
 </body>
+
 </html>
