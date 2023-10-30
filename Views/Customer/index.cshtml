@@ -47,7 +47,6 @@
                 alt=""></a>
             <div class="down-content">
               <a asp-controller="Book" asp-action="Details" asp-route-id="@item.BookId">
-                @* <h4>@Html.DisplayFor(modelItem => item.Title)</h4> *@
                 <h4>@item.Title</h4>
               </a>
               <h6>$@Html.DisplayFor(modelItem => item.Price)</h6>
