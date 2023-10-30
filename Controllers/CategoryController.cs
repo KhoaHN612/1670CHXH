@@ -21,6 +21,10 @@ namespace ASMProject.Controllers
         // GET: Category
         public async Task<IActionResult> Index()
         {
+            if (!User.Identity.IsAuthenticated || !User.IsInRole("StoreOwner"))
+            {
+                return RedirectToAction("Index", "Home"); 
+            }
               return _context.Categories != null ? 
                           View(await _context.Categories.ToListAsync()) :
                           Problem("Entity set 'Db1670asmContext.Categories'  is null.");
@@ -29,6 +33,11 @@ namespace ASMProject.Controllers
         // GET: Category/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (!User.Identity.IsAuthenticated || !User.IsInRole("StoreOwner"))
+            {
+                return RedirectToAction("Index", "Home"); 
+            }
+
             if (id == null || _context.Categories == null)
             {
                 return NotFound();
@@ -47,6 +56,10 @@ namespace ASMProject.Controllers
         // GET: Category/Create
         public IActionResult Create()
         {
+            if (!User.Identity.IsAuthenticated || !User.IsInRole("StoreOwner"))
+            {
+                return RedirectToAction("Index", "Home"); 
+            }
             return View();
         }
 
@@ -57,6 +70,10 @@ namespace ASMProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CatId,Name,AddBy,Status")] Category category)
         {
+            if (!User.Identity.IsAuthenticated || !User.IsInRole("StoreOwner"))
+            {
+                return RedirectToAction("Index", "Home"); 
+            }
             category.Status = 1;
             if (ModelState.IsValid)
             {
@@ -70,6 +87,10 @@ namespace ASMProject.Controllers
         // GET: Category/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (!User.Identity.IsAuthenticated || !User.IsInRole("StoreOwner"))
+            {
+                return RedirectToAction("Index", "Home"); 
+            }
             if (id == null || _context.Categories == null)
             {
                 return NotFound();
@@ -90,6 +111,10 @@ namespace ASMProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("CatId,Name,AddBy,Status")] Category category)
         {
+            if (!User.Identity.IsAuthenticated || !User.IsInRole("StoreOwner"))
+            {
+                return RedirectToAction("Index", "Home"); 
+            }
             if (id != category.CatId)
             {
                 return NotFound();
@@ -121,6 +146,10 @@ namespace ASMProject.Controllers
         // GET: Category/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (!User.Identity.IsAuthenticated || !User.IsInRole("StoreOwner"))
+            {
+                return RedirectToAction("Index", "Home"); 
+            }
             if (id == null || _context.Categories == null)
             {
                 return NotFound();
@@ -141,6 +170,10 @@ namespace ASMProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (!User.Identity.IsAuthenticated || !User.IsInRole("StoreOwner"))
+            {
+                return RedirectToAction("Index", "Home"); 
+            }
             if (_context.Categories == null)
             {
                 return Problem("Entity set 'Db1670asmContext.Categories'  is null.");
