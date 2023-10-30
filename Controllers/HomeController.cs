@@ -22,7 +22,7 @@ public class HomeController : Controller
         switch (User.Identity.IsAuthenticated, User.IsInRole("StoreOwner"), User.IsInRole("Admin"))
         {
             case (true, true, false):
-                return RedirectToAction("Indexx", "Admin");
+                return RedirectToAction("Index", "Storeowner");
             case (true, false, true):
                 return RedirectToAction("Index", "Admin");
             default:
