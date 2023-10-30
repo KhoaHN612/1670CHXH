@@ -17,14 +17,14 @@ public class AdminController : Controller
     public async Task<IActionResult> IndexAsync()
     {
         ViewBag.total = _context.OrderItems.Sum(o => o.Price);
-        return _context.Orders != null ? 
+        return _context.Orders != null ?
                     View(await _context.Orders.Include(o => o.OrderItems).ThenInclude(oi => oi.Book).ToListAsync()) :
                     Problem("Entity set 'Db1670asmContext.Orders'  is null.");
     }
 
     public async Task<IActionResult> Category()
     {
-        return _context.Categories != null ? 
+        return _context.Categories != null ?
                     View(await _context.Categories.ToListAsync()) :
                     Problem("Entity set 'Db1670asmContext.Categories'  is null.");
     }
@@ -55,7 +55,7 @@ public class AdminController : Controller
         {
             _context.Categories.Remove(category);
         }
-        
+
         await _context.SaveChangesAsync();
 
         return RedirectToAction(nameof(category));

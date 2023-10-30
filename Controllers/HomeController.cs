@@ -19,11 +19,20 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var books =await _context.Books.ToListAsync();
-        if(books == null){
-            return NotFound();
+        switch (User.Identity.IsAuthenticated, User.IsInRole("StoreOwner"), User.IsInRole("Admin"))
+        {
+            case (true, true, false):
+                return RedirectToAction("Indexx", "Admin");
+            case (true, false, true):
+                return RedirectToAction("Index", "Admin");
+            default:
+                var books = await _context.Books.ToListAsync();
+                if (books == null)
+                {
+                    return NotFound();
+                }
+                return View(books);
         }
-        return View(books);
     }
 
     public IActionResult Search()
