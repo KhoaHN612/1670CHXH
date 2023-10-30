@@ -1,6 +1,11 @@
 @model List<Microsoft.AspNetCore.Identity.IdentityRole>
 
-<a asp-action="Create" class="btn btn-primary">Create New Role</a>
+@{
+    ViewData["Title"] = "Manage Role";
+    Layout = "~/Views/Shared/adminLO.cshtml";
+}
+
+<a asp-action="Create" class="btn btn-primary my-3">Create New Role</a>
 <h2>Roles</h2>
 
 <table class="table">

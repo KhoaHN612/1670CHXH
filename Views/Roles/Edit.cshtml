@@ -1,5 +1,10 @@
 @model Microsoft.AspNetCore.Identity.IdentityRole;
 
+@{
+    ViewData["Title"] = "Manage Role";
+    Layout = "~/Views/Shared/adminLO.cshtml";
+}
+
 <h2>Edit Role</h2>
 
 <form asp-action="Edit" asp-route-id="@Model.Id">

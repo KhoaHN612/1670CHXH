@@ -6,7 +6,7 @@
     ViewData["Title"] = "Index";
 }
 <h2>Users</h2>
-
+<a class="btn btn-primary my-3 rounded" asp-controller="Roles" asp-action="Index">Manage Roles</a>
 <table class="table">
     <thead>
         <tr>
@@ -36,7 +36,8 @@
                 </td>
                 <td>
                     <a asp-action="Delete" asp-route-id="@user.Id">Delete</a> |
-                    <a asp-action="ManageRoles" asp-route-id="@user.Id">Manage Roles</a>
+                    <a asp-action="ManageRoles" asp-route-id="@user.Id">Add Roles |</a>
+                    <a asp-action="RemoveRoles" asp-route-id="@user.Id">Remove Roles</a>
                 </td>
             </tr>
         }

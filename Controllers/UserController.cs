@@ -14,10 +14,13 @@ namespace ASMProject.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public UserController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        private readonly Db1670asmContext _context;
+
+        public UserController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager,Db1670asmContext context)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -64,5 +67,53 @@ namespace ASMProject.Controllers
             else
                 return View("Error");
         }
+
+        public async Task<IActionResult> RemoveRoles(string? id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var roles = await _userManager.GetRolesAsync(user);
+
+            var userRoleViewModel = new UserRoleViewModel
+            {
+                User = user,
+                Roles = roles.ToList() 
+            };
+
+            return View(userRoleViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveRoles(string userId, string selectedRole)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                return View("Error");
+            }
+
+            if (!string.IsNullOrEmpty(selectedRole))
+            {
+                var result = await _userManager.RemoveFromRoleAsync(user, selectedRole);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View("Error");
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+
     }
 }
