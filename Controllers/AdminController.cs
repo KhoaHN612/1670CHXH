@@ -14,9 +14,12 @@ public class AdminController : Controller
         _context = context;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> IndexAsync()
     {
-        return View();
+        ViewBag.total = _context.OrderItems.Sum(o => o.Price);
+        return _context.Orders != null ? 
+                    View(await _context.Orders.Include(o => o.OrderItems).ThenInclude(oi => oi.Book).ToListAsync()) :
+                    Problem("Entity set 'Db1670asmContext.Orders'  is null.");
     }
 
     public async Task<IActionResult> Category()

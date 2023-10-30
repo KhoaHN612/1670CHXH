@@ -230,6 +230,7 @@
         src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
 
     <script>
+        new DataTable('#normalTable');
         $(document).ready(function () {
             $('#dataTable').DataTable({
                 dom: 'Bfrtip',
@@ -243,7 +244,6 @@
             });
         });
     </script>
-
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 

@@ -21,9 +21,9 @@ namespace ASMProject.Controllers
         // GET: Order
         public async Task<IActionResult> Index()
         {
-              return _context.Orders != null ? 
-                          View(await _context.Orders.Include(o => o.OrderItems).ToListAsync()) :
-                          Problem("Entity set 'Db1670asmContext.Orders'  is null.");
+            return _context.Orders != null ? 
+                        View(await _context.Orders.Include(o => o.OrderItems).ToListAsync()) :
+                        Problem("Entity set 'Db1670asmContext.Orders'  is null.");
         }
 
         // GET: Order/Details/5
