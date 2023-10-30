@@ -1,8 +1,7 @@
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/adminLO.cshtml";
+    ViewData["Title"] = "Indexx";
+    Layout = "~/Views/Shared/StrLo.cshtml";
 }
-@model IEnumerable<ASMProject.Models.Order>
 
 <div class="container-fluid dashboard-content ">
     <!-- ============================================================== -->
@@ -114,26 +113,6 @@
                                         <th class="border-0">Status</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                @foreach (var order in Model){
-                                    @foreach (var orItem in order.OrderItems){
-                                    <tr>
-                                        <td>@orItem.OrItemId</td>
-                                        <td>
-                                            <div class="m-r-10"><img src="~/uploads/@orItem.Book.Image" alt="user"
-                                                    class="rounded" width="45" height="60"></div>
-                                        </td>
-                                        <td>@orItem.Book.Title</td>
-                                        <td>@orItem.Book.BookId </td>
-                                        <td>@orItem.Quantity</td>
-                                        <td>@orItem.Price VND</td>
-                                        <td>@order.OrTime</td>
-                                        <td>@order.CusId </td>
-                                        <td><span class="badge-dot badge-brand mr-1"></span>@order.Status</td>
-                                    </tr>
-                                    }
-                                }
-                                </tbody>
                             </table>
                         </div>
                     </div>
