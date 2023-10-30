@@ -31,10 +31,22 @@ namespace ASMProject.Controllers
         }
 
 
-        public IActionResult Show()
+        public IActionResult Show(string category)
         {
-            var products = _context.Books.ToList();
-            return View(products);
+            var books = _context.Books.ToList();
+            ViewBag.Categories = _context.Categories
+                .Select(cat => cat.Name)
+                .Distinct()
+                .ToList();
+
+            if (!string.IsNullOrEmpty(category))
+            {
+                books = _context.Books
+                    .Where(book => book.Cat.Name == category)
+                    .ToList();
+            }
+
+            return View(books);
         }
 
         [HttpGet]
@@ -136,10 +148,11 @@ namespace ASMProject.Controllers
             {
                 return NotFound();
             }
-        
+
             if (ModelState.IsValid)
             {
-                if (book.ImageFile!=null){
+                if (book.ImageFile != null)
+                {
                     string uniqueFileName = GetUniqueFileName(book.ImageFile.FileName);
                     string filePath = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", uniqueFileName);
 

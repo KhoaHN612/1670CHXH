@@ -31,6 +31,19 @@
 
 <div class="latest-products">
   <div class="container">
+
+    @using (Html.BeginForm("Show", "Book"))
+    {
+        <div class="row w-100 my-3">
+            <div class="col-md-8">
+                @Html.DropDownList("category", new SelectList(ViewBag.Categories), "All Categories", new { @class = "form-control" })
+            </div>
+            <div class="col-md-4">
+                <input type="submit" value="Filter" class="btn btn-primary" />
+            </div>
+        </div>
+    }
+
     <div class="row">
       @foreach (var item in Model)
       {
