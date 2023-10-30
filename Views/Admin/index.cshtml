@@ -2,6 +2,7 @@
     ViewData["Title"] = "Admin Home Page";
     Layout = "~/Views/Shared/adminLO.cshtml";
 }
+@model IEnumerable<ASMProject.Models.Order>
 
 <div class="container-fluid dashboard-content ">
     <!-- ============================================================== -->
@@ -10,14 +11,14 @@
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">E-commerce Dashboard Template </h2>
-                <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris
-                    facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                <h2 class="pageheader-title">E-commerce Dashboard </h2>
+                @* <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris
+                    facilisis faucibus at enim quis massa lobortis rutrum.</p> *@
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">E-Commerce Dashboard Template</li>
+                            <li class="breadcrumb-item active" aria-current="page">E-Commerce Dashboard</li>
                         </ol>
                     </nav>
                 </div>
@@ -35,11 +36,11 @@
                     <div class="card-body">
                         <h5 class="text-muted">Total Revenue</h5>
                         <div class="metric-value d-inline-block">
-                            <h1 class="mb-1">$12099</h1>
+                            <h1 class="mb-1">@ViewBag.total VND</h1>
                         </div>
-                        <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                        @* <div class="metric-label d-inline-block float-right text-success font-weight-bold">
                             <span><i class="fa fa-fw fa-arrow-up"></i></span><span>5.86%</span>
-                        </div>
+                        </div> *@
                     </div>
                     <div id="sparkline-revenue"></div>
                 </div>
@@ -49,11 +50,11 @@
                     <div class="card-body">
                         <h5 class="text-muted">Affiliate Revenue</h5>
                         <div class="metric-value d-inline-block">
-                            <h1 class="mb-1">$12099</h1>
+                            <h1 class="mb-1">@ViewBag.total VND</h1>
                         </div>
-                        <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                        @* <div class="metric-label d-inline-block float-right text-success font-weight-bold">
                             <span><i class="fa fa-fw fa-arrow-up"></i></span><span>5.86%</span>
-                        </div>
+                        </div> *@
                     </div>
                     <div id="sparkline-revenue2"></div>
                 </div>
@@ -99,7 +100,7 @@
                     <h5 class="card-header">Recent Orders</h5>
                     <div class="card-body p-0">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table display" id="normalTable">
                                 <thead class="bg-light">
                                     <tr class="border-0">
                                         <th class="border-0">#</th>
@@ -114,66 +115,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                @foreach (var order in Model){
+                                    @foreach (var orItem in order.OrderItems){
                                     <tr>
-                                        <td>1</td>
+                                        <td>@orItem.OrItemId</td>
                                         <td>
-                                            <div class="m-r-10"><img src="~/assets/images/product-pic.jpg" alt="user"
-                                                    class="rounded" width="45"></div>
+                                            <div class="m-r-10"><img src="~/uploads/@orItem.Book.Image" alt="user"
+                                                    class="rounded" width="45" height="60"></div>
                                         </td>
-                                        <td>Product #1 </td>
-                                        <td>id000001 </td>
-                                        <td>20</td>
-                                        <td>$80.00</td>
-                                        <td>27-08-2018 01:22:12</td>
-                                        <td>Patricia J. King </td>
-                                        <td><span class="badge-dot badge-brand mr-1"></span>InTransit </td>
+                                        <td>@orItem.Book.Title</td>
+                                        <td>@orItem.Book.BookId </td>
+                                        <td>@orItem.Quantity</td>
+                                        <td>@orItem.Price VND</td>
+                                        <td>@order.OrTime</td>
+                                        <td>@order.CusId </td>
+                                        <td><span class="badge-dot badge-brand mr-1"></span>@order.Status</td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>
-                                            <div class="m-r-10"><img src="~/assets/images/product-pic-2.jpg" alt="user"
-                                                    class="rounded" width="45"></div>
-                                        </td>
-                                        <td>Product #2 </td>
-                                        <td>id000002 </td>
-                                        <td>12</td>
-                                        <td>$180.00</td>
-                                        <td>25-08-2018 21:12:56</td>
-                                        <td>Rachel J. Wicker </td>
-                                        <td><span class="badge-dot badge-success mr-1"></span>Delivered </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>
-                                            <div class="m-r-10"><img src="~/assets/images/product-pic-3.jpg" alt="user"
-                                                    class="rounded" width="45"></div>
-                                        </td>
-                                        <td>Product #3 </td>
-                                        <td>id000003 </td>
-                                        <td>23</td>
-                                        <td>$820.00</td>
-                                        <td>24-08-2018 14:12:77</td>
-                                        <td>Michael K. Ledford </td>
-                                        <td><span class="badge-dot badge-success mr-1"></span>Delivered </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>
-                                            <div class="m-r-10"><img src="~/assets/images/product-pic-4.jpg" alt="user"
-                                                    class="rounded" width="45"></div>
-                                        </td>
-                                        <td>Product #4 </td>
-                                        <td>id000004 </td>
-                                        <td>34</td>
-                                        <td>$340.00</td>
-                                        <td>23-08-2018 09:12:35</td>
-                                        <td>Michael K. Ledford </td>
-                                        <td><span class="badge-dot badge-success mr-1"></span>Delivered </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="9"><a href="#" class="btn btn-outline-light float-right">View
-                                                Details</a></td>
-                                    </tr>
+                                    }
+                                }
                                 </tbody>
                             </table>
                         </div>
