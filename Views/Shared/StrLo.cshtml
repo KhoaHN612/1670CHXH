@@ -59,6 +59,10 @@
                                         <a class="nav-link" asp-controller="Storeowner" asp-action="Index">Home</a>
                                     </li>
                                     <li class="nav-item">
+                                        <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index"
+                                            title="Account">Store Owner Profile</a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a class="nav-link" asp-controller="Book" asp-action="Index">Manage
                                             Books</a>
                                     </li>
@@ -74,7 +78,14 @@
                                         <a class="nav-link" asp-controller="Category" asp-action="Create">Create new
                                             Category</a>
                                     </li>
-                                </ul>
+                                    <li class="nav-item">
+                                        <form id="logoutForm" class="form-inline" asp-area="Identity"
+                                            asp-page="/Account/Logout"
+                                            asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                            <button id="logout" type="submit" class="nav-link">Logout<i
+                                                    class="fas fa-sign-out-alt ms-2"></i></button>
+                                        </form>
+                                    </li>
                             </li>
                         </ul>
                     </div>
