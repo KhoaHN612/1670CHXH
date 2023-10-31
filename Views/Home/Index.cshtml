@@ -46,7 +46,7 @@
             <div class="down-content px-1">
               <a asp-controller="Book" asp-action="Details" asp-route-id="@item.BookId">
                 <h4 style="width:130px; overflow: hidden; height:100px">@item.Title<br></h4>
-                  <h5>@item.Cat.Name</h5>
+                <h5>@item.Cat.Name</h5>
               </a>
               <h6 class="me-0" style="position: absolute; right:0px">@String.Format("{0:0.##}", item.Price) VND</h6>
               <ul class="stars">
