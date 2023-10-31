@@ -16,6 +16,10 @@ public class AdminController : Controller
 
     public async Task<IActionResult> IndexAsync()
     {
+        if (!User.Identity.IsAuthenticated || !User.IsInRole("Admin"))
+        {
+            return RedirectToAction("Index", "Home"); 
+        }
         ViewBag.total = _context.OrderItems.Sum(o => o.Price);
         return _context.Orders != null ?
                     View(await _context.Orders.Include(o => o.OrderItems).ThenInclude(oi => oi.Book).ToListAsync()) :

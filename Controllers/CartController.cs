@@ -21,6 +21,10 @@ namespace ASMProject.Controllers
         // GET: Cart
         public async Task<IActionResult> Index()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home"); 
+            }
             if (User?.Identity?.IsAuthenticated == true){
                 var db1670Context = _context.Carts
                     .Include(c => c.Book)
@@ -59,6 +63,10 @@ namespace ASMProject.Controllers
         // GET: Cart/Create
         public async Task<IActionResult> CreateAsync(int id)
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home"); 
+            }
             var cart = new Cart();
             cart.BookId = id;
             var product = await _context.Books
