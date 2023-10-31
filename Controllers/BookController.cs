@@ -33,7 +33,7 @@ namespace ASMProject.Controllers
 
         public IActionResult Show(string category)
         {
-            var books = _context.Books.ToList();
+            var books = _context.Books.Include(b=>b.Cat).ToList();
             ViewBag.Categories = _context.Categories
                 .Select(cat => cat.Name)
                 .Distinct()
@@ -53,7 +53,7 @@ namespace ASMProject.Controllers
         public async Task<IActionResult> Search(string searchkey)
         {
             ViewBag.key = searchkey;
-            var book = from b in _context.Books select b;
+            var book = from b in _context.Books.Include(b=>b.Cat) select b;
             if (!string.IsNullOrEmpty(searchkey))
             {
                 book = book.Where(b => b.Title!.Contains(searchkey));

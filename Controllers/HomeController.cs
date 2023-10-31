@@ -26,7 +26,7 @@ public class HomeController : Controller
             case (true, false, true):
                 return RedirectToAction("Index", "Admin");
             default:
-                var books = await _context.Books.ToListAsync();
+                var books = await _context.Books.Include(b=>b.Cat).ToListAsync();
                 if (books == null)
                 {
                     return NotFound();

@@ -27,37 +27,39 @@
         </div>
     </div>
 </div>
-<br></br>
-<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-    <div class="card">
-        <div class="card-body">
-            <form name="search">
-                <div class="form-group form-inline">
-                    <input type="text" name="searchkey" class="form-control form-inline" />
-                    <input type="submit" value="Search" class="form-control" />
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<br/>
-<h4>Research Key: @ViewBag.key</h4>
-<br/>
+
 
 <div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card-body mt-2 p-0 ">
+                <form name="search">
+                    <div class="form-group form-inline">
+                        <input type="text" name="searchkey" style="width:300px" class="form-control form-inline" />
+                        <button type="submit" class="form-control btn btn-primary" style="width:100px" />Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6 my-auto">
+            <h3 class="my-auto">Research Key: @ViewBag.key</h4>
+        </div>
+    </div>
     <div class="row">
         @foreach (var item in Model)
         {
             <div class="col-md-4">
                 <div class="product-item">
                     <a asp-controller="Book" asp-action="Details" asp-route-id="@item.BookId"><img
-                            src="~/uploads/@Html.DisplayFor(modelItem => item.Image)" alt="Book Image"></a>
-                    s <div class="down-content">
+                            src="~/uploads/@Html.DisplayFor(modelItem => item.Image)" height="430px" alt="Book Image"></a>
+                    <div class="down-content px-1">
                         <a asp-controller="Book" asp-action="Details" asp-route-id="@item.BookId">
-                            <h4>@Html.DisplayFor(modelItem => item.Title)</h4>
+                            <h4 style="width:130px; overflow: hidden; height:100px">@Html.DisplayFor(modelItem =>
+                            item.Title)</h4>
+                            <h5>@item.Cat.Name</h5>
                         </a>
-                        <h6>$ @Html.DisplayFor(modelItem => item.Price)</h6>
-                        <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                        <h6 class="me-0" style="position: absolute; right:0px">@String.Format("{0:0.##}", item.Price) VND
+                        </h6>
                         <ul class="stars">
                             <li><i class="fa fa-star"></i></li>
                             <li><i class="fa fa-star"></i></li>
@@ -65,7 +67,7 @@
                             <li><i class="fa fa-star"></i></li>
                             <li><i class="fa fa-star"></i></li>
                         </ul>
-                        <span>Reviews (21)</span>
+                        <span>Reviews (0)</span>
                     </div>
                 </div>
             </div>

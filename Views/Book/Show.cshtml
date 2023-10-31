@@ -49,12 +49,11 @@
           <div class="product-item">
             <a asp-controller="Book" asp-action="Details" asp-route-id="@item.BookId"><img
                 src="~/uploads/@Html.DisplayFor(modelItem => item.Image)" alt="Book Image" height="430px"></a>
-            <div class="down-content">
+            <div class="down-content px-1">
               <a asp-controller="Book" asp-action="Details" asp-route-id="@item.BookId">
                 <h4 style="width:130px; overflow: hidden; height:100px">@Html.DisplayFor(modelItem => item.Title)</h4>
               </a>
-              <h6>@String.Format("{0:0.##}", item.Price)</h6>
-              <p style="overflow: hidden; height:100px">@Html.DisplayFor(modelItem => item.Description)</p>
+              <h6 class="me-0" style="position: absolute; right:0px">@String.Format("{0:0.##}", item.Price) VND</h6>
               <ul class="stars">
                 <li><i class="fa fa-star"></i></li>
                 <li><i class="fa fa-star"></i></li>

@@ -21,8 +21,12 @@ namespace ASMProject.Controllers
         // GET: Order
         public async Task<IActionResult> Index()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home"); 
+            }
             return _context.Orders != null ? 
-                        View(await _context.Orders.Include(o => o.OrderItems).ToListAsync()) :
+                        View(await _context.Orders.Include(o => o.OrderItems).Where(o=>o.CusId == User.Identity.Name).ToListAsync()) :
                         Problem("Entity set 'Db1670asmContext.Orders'  is null.");
         }
 

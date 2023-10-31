@@ -42,35 +42,31 @@
                     <h5 class="mb-0 text-black nav-user-name">Hello @UserManager.GetUserName(User)</h5>
                 </div>
 
+                <a class="dropdown-item" id="manage" asp-area="Identity" asp-page="/Account/Manage/Index" title="Account">
+                    <i class="fas fa-id-card mr-2"></i> Account</a>
+
                 @if (User.IsInRole("Admin"))
                 {
                     <a class="dropdown-item" asp-controller="Admin" asp-action="Index" title="Manage"><i
-                            class="fas fa-user mr-2"></i>Admin Manage</a>
+                            class="fas fa-user mr-2"></i> Admin Manage</a>
                 }
                 else
                 @if (User.IsInRole("Storeowner"))
                 {
                     <a class="dropdown-item" asp-controller="Admin" asp-action="Index" title="Manage"><i
-                            class="fa-solid fa-store"></i>Store Owner Manage</a>
+                            class="fa-solid fa-store mr-2"></i> Store Owner Manage</a>
                 }
                 else
                 {
                     <a class="dropdown-item" asp-controller="Cart" asp-action="Index"><i class="fa fa-shopping-cart"
-                            aria-hidden="true"></i>Cart</a>
+                            aria-hidden="true"></i> Cart</a>
                     <a class="dropdown-item" asp-controller="Order" asp-action="Index"><i
-                            class="fa-solid fa-file-invoice-dollar"></i>Order</a>
+                            class="fa-solid fa-file-invoice-dollar mr-2"></i> Order</a>
                 }
-
-
-
-                <a class="dropdown-item" id="manage" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i
-                        class="fa-solid fa-people-roof"></i>Account</a>
-
 
                 <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
                     asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                    <button id="logout" type="submit" class="btn  btn-outline-0 border-0">Logout<i class="fa fa-sign-out"
-                            aria-hidden="true"></i></button>
+                    <button id="logout" type="submit" class="btn  btn-outline-0 border-0">Logout<i class="fas fa-sign-out-alt ms-2"></i></button>
                 </form>
             </div>
         </li>
@@ -81,7 +77,7 @@
 else
 {
     <li class="nav-item">
-        <a class="nav-link" id="login" asp-area="Identity" asp-page="/Account/Login"><i class="fa fa-sign-in"
-                aria-hidden="true"></i>Login</a>
+        <a class="nav-link" id="login" asp-area="Identity" asp-page="/Account/Login"><i class="fa fa-sign-in mr-2"
+                aria-hidden="true"></i> Login</a>
     </li>
 }
