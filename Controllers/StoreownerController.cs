@@ -8,23 +8,33 @@ namespace ASMProject.Controllers;
 public class StoreownerController : Controller
 {
 
-    private readonly ILogger<HomeController> _logger;
     private readonly Db1670asmContext _context;
 
-    public StoreownerController(ILogger<HomeController> logger, Db1670asmContext context)
+    public StoreownerController(Db1670asmContext context)
     {
-        _logger = logger;
         _context = context;
     }
 
+    // public async Task<IActionResult> IndexAsync()
+    // {
+    //     ViewBag.total = _context.OrderItems.Sum(o => o.Price);
+    //     return _context.Orders != null ?
+    //                 View(await _context.Orders.Include(o => o.OrderItems).ThenInclude(oi => oi.Book).ToListAsync()) :
+    //                 Problem("Entity set 'Db1670asmContext.Orders'  is null.");
+    // }
+
     public async Task<IActionResult> Index()
     {
-        var books = await _context.Books.ToListAsync();
-        if (books == null)
-        {
-            return NotFound();
-        }
-        return View(books);
+        // var books = await _context.Books.ToListAsync();
+        // if (books == null)
+        // {
+        //     return NotFound();
+        // }
+        // return View(books);
+        ViewBag.total = _context.OrderItems.Sum(o => o.Price);
+        return _context.Orders != null ?
+                    View(await _context.Orders.Include(o => o.OrderItems).ThenInclude(oi => oi.Book).ToListAsync()) :
+                    Problem("Entity set 'Db1670asmContext.Orders'  is null.");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
